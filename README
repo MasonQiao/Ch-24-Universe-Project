@@ -34,3 +34,8 @@ create an updated p model. This model is then going to go to the draw handler, w
 The tick handler is where the time left in the game is kept track of, and is also where the game detects if the cat has tagged the mouse. Using the distance helper function, it checks if the distance between the two
 players are less than 100, and if so it ends the game. It does this by using two other helper functions, cwins and mwins. These helper functions set the cat and mouse on the screen at a specific place, and then using
 the new p model calculates the scores with the score and aux helper functions; the score helper function uses recursion to calculate the total score of the player, which the aux helper function adds randomness to this score.|#
+
+
+BONUS EDIT: the time kept on displaying as a fraction instead of float/decimal.
+this was annoying because it made the time harder to read, because when the denominator of the fraction changes,
+the entire number gets shifted on the screen. we had to use a quite obscure function called number->string-digits to fix this issue.
