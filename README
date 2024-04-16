@@ -1,5 +1,9 @@
 #| CONTROLS (HOW TO PLAY)
 
+!!!
+You need to download the 24.rkt, server, and posm files. Run the server file and then the 24.rkt file to play.
+!!!
+
 Cat and mouse is a TIER 4 game with two different windows, which has the cat window trying to catch up to the mouse window in order to win, similar to the game of tag.
 Only the cat can tag the mouse, and if the mouse approaches the cat within 100 pixels then the cat will win.
 
