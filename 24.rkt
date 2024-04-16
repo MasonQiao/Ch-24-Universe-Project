@@ -26,9 +26,9 @@
 (define (dh m) (cond
                  [(> (p-ct m) 0) (overlay/align "middle" "top" (text "Mouse was caught. Cat wins." 20 "black") (place-image mouseimage (p-mx m) (p-my m) (place-image catimage (p-cx m) (p-cy m) floorimage)))]
                  [(> (p-mt m) 0) (overlay/align "middle" "top" (text "Time ran out. Mouse wins." 20 "black") (place-image mouseimage (p-mx m) (p-my m) (place-image catimage (p-cx m) (p-cy m) floorimage)))]
-                 [else (overlay/align "middle" "top" (text (string-append "Time Left: " (number->string (p-t m))) 20 "black") (place-image mouseimage (p-mx m) (p-my m) (place-image catimage (p-cx m) (p-cy m) floorimage)))]))
+                 [else (overlay/align "middle" "top" (text (string-append "Time Left: " (number->string-digits (p-t m) 2)) 20 "black") (place-image mouseimage (p-mx m) (p-my m) (place-image catimage (p-cx m) (p-cy m) floorimage)))]))
 
-(define (th m) (if (<= (p-t m) 0) (mwins m) (if (< (distance (p-cx m) (p-cy m) (p-mx m) (p-my m)) 100) (cwins m) (make-p (p-m m) (p-cx m) (p-cy m) (p-mx m) (p-my m) (p-cs m) (p-ms m) (max 0 (- (p-t m) 0.05)) (max 0 (- (p-ct m) 0.05)) (max 0 (- (p-mt m) 0.05))))))
+(define (th m) (if (<= (p-t m) 0) (mwins m) (if (< (distance (p-cx m) (p-cy m) (p-mx m) (p-my m)) 100) (cwins m) (make-p (p-m m) (p-cx m) (p-cy m) (p-mx m) (p-my m) (p-cs m) (p-ms m) (max 0 (- (p-t m) 0.01)) (max 0 (- (p-ct m) 0.01)) (max 0 (- (p-mt m) 0.05))))))
 (define (cwins m) (make-p (p-m m) 500 100 1400 100 (+ (p-cs m) (score scorelist)) (p-ms m) 20 5 0))
 (define (mwins m) (make-p (p-m m) 500 100 1400 100 (p-cs m) (+ (p-ms m) (score scorelist)) 20 0 5))
 
@@ -58,7 +58,7 @@
     (register LOCALHOST) ;; see 08 Server
     (to-draw dh1)
     (on-key kh)
-    (on-tick th 0.05)
+    (on-tick th 0.01)
     (on-receive rh)
     (on-mouse mh)))
 
