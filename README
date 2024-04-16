@@ -1,0 +1,36 @@
+#| CONTROLS (HOW TO PLAY)
+
+Cat and mouse is a TIER 4 game with two different windows, which has the cat window trying to catch up to the mouse window in order to win, similar to the game of tag.
+Only the cat can tag the mouse, and if the mouse approaches the cat within 100 pixels then the cat will win.
+
+The cat can be controlled with the traditional w, a, s, d directional keys, with d moving the mouse to the right and so on.
+The mouse can be controlled with the computer mouse, giving it an advantage as it is faster.
+
+When the game begins, 30 seconds are given to the cat in order to hit the mouse, and the clock ticks down every second. When the clock hits 0, the player who won will be displayed on the screen.
+Additionally, the game also will be keep track of the scores of each player.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+HOW IT WORKS / CODE SUMMARY
+
+The game runs of the structure p, which contains the current player (cat or mouse), cat x and y position, mouse x and y position, cat and mouse scores, the time remaining, and the times remaining for the cat and mouse.
+The message file has the structure posm, which holds the x and y values of the current world/player who the message was made in a package with. It is used to send the location of both the cat and the mouse.
+Whether the message was for the cat or the mouse can be detected by the reviece handler's p that it is given, as the p-m player reveals which person the message was inteded for. 
+
+The draw handler takes in a p model, using the cat and mouse x and y coodinated to draw the current game screen for both worlds. It is also where the end screen is displayed, using a conditional to check if the time
+for the cat and mouse has ran out.
+The draw handler also displays the amound of time remaining, using number->string to display text of the second left, given updated by the tick handler.
+
+The key handler first checks if the current model of the current world is not a mouse, making sure that only the cat window will be able to use the arrow keys to control the cat.
+Then, once it is sure that the current model is not a mouse (it is a cat), the game uses a conditional to change the x and y location based on the input given (w, a, s, or d).
+The key handler then makes a package with the current model and the updated message x y location, which then travels to the recieve handler.
+
+Similar to the key handler, the mouse handler checks if the current window's model is the mouse, and if so it makes a package with the current model and the current mouse x and y coordinates.
+This package also goes to the recieve handler, which is in charge of updating the overall p model for the player.
+
+The recieve handler updates the p model for the player, taking in the current model (m) and the posm message. It updates the x and y of either the cat or the mouse (depending on the model p-m player), using make-p to
+create an updated p model. This model is then going to go to the draw handler, where the game is drawn.
+
+The tick handler is where the time left in the game is kept track of, and is also where the game detects if the cat has tagged the mouse. Using the distance helper function, it checks if the distance between the two
+players are less than 100, and if so it ends the game. It does this by using two other helper functions, cwins and mwins. These helper functions set the cat and mouse on the screen at a specific place, and then using
+the new p model calculates the scores with the score and aux helper functions; the score helper function uses recursion to calculate the total score of the player, which the aux helper function adds randomness to this score.|#
